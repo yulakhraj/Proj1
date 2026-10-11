@@ -4,8 +4,8 @@ import {ArrowRight,BookOpen,BrainCircuit,Check,ChevronDown,Clock3,ExternalLink,F
 import {domains,questions,sources} from './data';
 
 const nav=[['overview','Overview',LayoutDashboard],['syllabus','Syllabus',Target],['notes','Quick notes',BookOpen],['bank','Question bank',BrainCircuit],['mock','Mock exam',Clock3]];
-const load=()=>{try{return JSON.parse(localStorage.getItem('arc-progress'))||{done:[],streak:0,last:null}}catch{return{done:[],streak:0,last:null}}};
-const save=v=>localStorage.setItem('arc-progress',JSON.stringify(v));
+const load=()=>{try{const value=JSON.parse(localStorage.getItem('arc-progress'));return value&&Array.isArray(value.done)?value:{done:[],streak:0,last:null}}catch{return{done:[],streak:0,last:null}}};
+const save=v=>{try{localStorage.setItem('arc-progress',JSON.stringify(v))}catch{/* Study remains available when browser storage is blocked. */}};
 const reveal={hidden:{opacity:0,y:18},show:{opacity:1,y:0,transition:{duration:.5,ease:[.22,1,.36,1]}}};
 
 function App(){
